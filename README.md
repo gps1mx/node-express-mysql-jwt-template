@@ -1,3 +1,3 @@
 # node-express-mysql-jwt-template
 
-Template báse de Node, Express, Mysql y JWT
+Template base de Node, Express, Mysql y JWT
