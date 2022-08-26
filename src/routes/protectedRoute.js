@@ -4,7 +4,6 @@ const mysqlConnection = require('../database.js');
 const { verifyToken } = require('../functions')
 const jwt = require('jsonwebtoken');
 
-
 // GET all Employees
 router.get('/protected/api/', verifyToken, (req, res) => {
 	jwt.verify(req.token, process.env.TOKEN_SECRET, (err, auth) => {
@@ -20,8 +19,6 @@ router.get('/protected/api/', verifyToken, (req, res) => {
 			});
 		}
 	})
-
 });
-
 
 module.exports = router;

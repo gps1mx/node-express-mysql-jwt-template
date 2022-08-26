@@ -1,20 +1,25 @@
 const mysql = require('mysql');
 
-const mysqlConnection = mysql.createConnection({
+const pool = mysql.createPool({
+  connectionLimit: 100,
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USERNAME,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
-  multipleStatements: true
 });
 
-mysqlConnection.connect(function (err) {
-  if (err) {
-    console.error(err);
-    return;
-  } else {
-    console.log('db is connected');
-  }
-});
+let regreso = {};
 
-module.exports = mysqlConnection;
+regreso.relacionBasesAll = () => {
+  return new Promise((resolve, reject) => {
+    pool.query('SELECT * FROM relacion_bases', (err, results) => {
+      if (!err) {
+        return resolve(results);
+      } else {
+        reject(err);
+      }
+    });
+  });
+}
+
+module.exports = pool
